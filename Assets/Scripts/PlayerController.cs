@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private HealthHandler healthHandler;
 
-    public int points = 0;
-
     private bool canDash = true;
     private bool isDashing;
     public bool ApplyDash = false;

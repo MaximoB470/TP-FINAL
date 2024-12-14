@@ -12,7 +12,8 @@ public class ShopManager : MonoBehaviour, IShopManager
 {
     public static ShopManager Instance { get; private set; }
 
-    [SerializeField] private PlayerController playerController;
+     private ScoreManager scoreManager;
+     private PlayerController playerController;
     [SerializeField] private int dashCost = 300;
     [SerializeField] private int escapeCost = 2000;
     [SerializeField] private int medkitCost = 300;
@@ -38,24 +39,28 @@ public class ShopManager : MonoBehaviour, IShopManager
     private void Start()
     {
         ServiceLocator.Instance.Register<IShopManager>(this);
-        if (playerController == null)
+        if (scoreManager == null)
+        {
+            scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
+        }
+        if (scoreManager == null)
         {
             playerController = ServiceLocator.Instance.GetService<PlayerController>();
         }
     }
     public void BuyDash()
     {
-        if (playerController != null && playerController.points >= dashCost)
+        if (scoreManager.value >= dashCost)
         {
-            playerController.points -= dashCost;
+            scoreManager.value -= dashCost;
             playerController.UnlockDash();
         }
     }
     public void BuyMedKit()
     {
-        if (playerController != null && playerController.points >= medkitCost)
+        if (scoreManager.value >= medkitCost)
         {
-            playerController.points -= medkitCost;
+            scoreManager.value -= medkitCost;
 
             if (medKitFactory == null)
             {
@@ -72,10 +77,10 @@ public class ShopManager : MonoBehaviour, IShopManager
     }
     public void BuyEscape()
     {
-        if (playerController != null && playerController.points >= escapeCost)
+        if (scoreManager.value >= escapeCost)
         {
             state = new StateMachine();
-            playerController.points -= escapeCost;
+            scoreManager.value -= escapeCost;
             var gameManager = ServiceLocator.Instance.GetService<GameManager>();
             if (gameManager != null)
             {

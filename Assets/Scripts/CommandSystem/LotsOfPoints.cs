@@ -7,14 +7,14 @@ public class LotsOfPoints : Command
 {
     public override void Execute()
     {
-       var playerController = ServiceLocator.Instance.GetService<PlayerController>();
-       playerController.points = 99999999;
-       Debug.Log("Applying points");
+       var scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
+        scoreManager.value += scoreManager.commandValue;
+        Debug.Log("Applying points");
     }
     public override void Execute(string[] args)
     {
-        var playerController = ServiceLocator.Instance.GetService<PlayerController>();
-        playerController.points = 99999999;
+        var scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
+        scoreManager.value += scoreManager.commandValue;
         Debug.Log("Applying points");
     }
 }

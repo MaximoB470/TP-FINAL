@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour, IUImanager
 
     private PlayerController playerController;
     private GameManager gameManager;
+    private ScoreManager scoreManager;
 
     public GameObject ShopMenu;
 
@@ -54,10 +55,11 @@ public class UIManager : MonoBehaviour, IUImanager
     private void Start()
     {
         ServiceLocator.Instance.Register<UIManager>(this);
-        HideAllMenus();
+        ServiceLocator.Instance.Register<IUImanager>(this);
         playerController = ServiceLocator.Instance.GetService<PlayerController>();
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
-        ServiceLocator.Instance.Register<IUImanager>(this);
+        scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
+        HideAllMenus();
 
         if (healthTextObject != null)
         {
@@ -72,7 +74,7 @@ public class UIManager : MonoBehaviour, IUImanager
             roundText = roundTextObject.GetComponent<TextMeshProUGUI>();
         }
         UpdateHealth(playerController != null ? playerController.HPTracker : 0);
-        UpdatePoints(playerController != null ? playerController.points : 0);
+        UpdatePoints(scoreManager != null ? scoreManager.value : 0);
         UpdateRound(gameManager != null ? gameManager.currentWave : 0);
     }
     private void Update()
@@ -80,7 +82,7 @@ public class UIManager : MonoBehaviour, IUImanager
         if (playerController != null)
         {
             UpdateHealth(playerController.HPTracker);
-            UpdatePoints(playerController.points);
+            UpdatePoints(scoreManager.value);
         }
         if (gameManager != null)
         {

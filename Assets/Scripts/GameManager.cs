@@ -16,14 +16,15 @@ public class GameManager : MonoBehaviour, IGameManager
     public static GameManager Instance { get; private set; }
     [SerializeField] private List<EnemySpawn> spawners; 
     public int currentWave = 1; 
+    public int waveRestTime = 30; 
     private int enemiesToSpawn; 
     public int enemiesRemaining; 
-    public int waveRestTime = 30; 
+    public bool isActive = false;
+    public bool ForceWave;
     public GameObject Bench;
     public GameObject CommandList;
     private StateMachine state;
-    public bool isActive = false;
-    public bool ForceWave;
+    private ScoreManager scoreManager;
     private void Awake()
     {
 
@@ -43,15 +44,16 @@ public class GameManager : MonoBehaviour, IGameManager
     }
     private void Start()
     {
-        StartWave();
         var audioService = new AudioService();
         ServiceLocator.Instance.Register<IAudioService>(audioService);
         audioService.BackgroundMusic();
-        Bench.SetActive(false);
+        scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
         if (spawners == null || spawners.Count == 0)
         {
             return;
         }
+        StartWave();
+        Bench.SetActive(false);
     }
     private void Update()
     {
@@ -90,8 +92,7 @@ public class GameManager : MonoBehaviour, IGameManager
     public void EnemyDefeated()
     {
         enemiesRemaining--;
-        var playerController = ServiceLocator.Instance.GetService<PlayerController>();
-        playerController.points += 10;
+        scoreManager.incrementPoints();
         if (enemiesRemaining <= 0)
         {
             Bench.SetActive(true);
