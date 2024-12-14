@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba4a708bbc8df864599518929de0502e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - firePoint: {instanceID: 0}
+  - bulletFactory: {instanceID: 0}
+  - weaponData: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - player
+  - enemies
+  - bench
+  - objects
+  - GameManager
+  - Walls
+  - HellGrass
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - intereactables
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 4214673457
+    locked: 0
+  - name: Structures
+    uniqueID: 2498919923
+    locked: 0
+  - name: Entities
+    uniqueID: 335337603
+    locked: 0
+  - name: Objects
+    uniqueID: 3317118695
+    locked: 0
