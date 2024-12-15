@@ -14,20 +14,21 @@ public interface IGameManager
 public class GameManager : MonoBehaviour, IGameManager
 {
     public static GameManager Instance { get; private set; }
-    [SerializeField] private List<EnemySpawn> spawners; 
-    public int currentWave = 1; 
-    public int waveRestTime = 30; 
-    private int enemiesToSpawn; 
-    public int enemiesRemaining; 
+
+    [SerializeField] private List<EnemySpawn> spawners;  // Lista de puntos de spawn
+    public int currentWave = 1;
+    public int waveRestTime = 30;
+    private int enemiesToSpawn;
+    public int enemiesRemaining;
     public bool isActive = false;
     public bool ForceWave;
     public GameObject Bench;
     public GameObject CommandList;
+
     private StateMachine state;
     private ScoreManager scoreManager;
     private void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
@@ -35,23 +36,27 @@ public class GameManager : MonoBehaviour, IGameManager
         }
         else
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
+
         ServiceLocator.Instance.Register<GameManager>(this);
         state = new StateMachine();
         state.ChangeState(new PlayingState(state));
-       
     }
     private void Start()
     {
         var audioService = new AudioService();
         ServiceLocator.Instance.Register<IAudioService>(audioService);
         audioService.BackgroundMusic();
+
         scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();
+
         if (spawners == null || spawners.Count == 0)
         {
+            Debug.LogError("No spawners found.");
             return;
         }
+
         StartWave();
         Bench.SetActive(false);
     }
@@ -64,7 +69,8 @@ public class GameManager : MonoBehaviour, IGameManager
                 CommandList.SetActive(!CommandList.activeSelf);
             }
         }
-        if(ForceWave == true) 
+
+        if (ForceWave == true)
         {
             StartCoroutine(WaitBeforeNextWave());
             enemiesRemaining = 0;
@@ -85,7 +91,8 @@ public class GameManager : MonoBehaviour, IGameManager
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             EnemySpawn selectedSpawner = spawners[Random.Range(0, spawners.Count)];
-            selectedSpawner.SpawnEnemy();
+            selectedSpawner.SpawnEnemy();  
+
             yield return new WaitForSeconds(Random.Range(selectedSpawner.MinimumSpawnTime, selectedSpawner.MaximumSpawnTime));
         }
     }
@@ -93,6 +100,7 @@ public class GameManager : MonoBehaviour, IGameManager
     {
         enemiesRemaining--;
         scoreManager.incrementPoints();
+
         if (enemiesRemaining <= 0)
         {
             Bench.SetActive(true);

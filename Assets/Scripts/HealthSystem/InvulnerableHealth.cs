@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 
 public class InvulnerableHealth : IHealth
-{ 
+{
     private IHealth original;
     public InvulnerableHealth(IHealth original)
     {
-        this.original = original;
+        this.original = original; 
     }
     public int Life
     {
-        get => original.Life;
-        set => original.Life = value;
+        get => original.Life; 
+        set => original.Life = value; 
     }
     public void Awake()
     {
-        original.Awake();
+        original.Awake(); 
     }
     public void GetDamage(int value)
     {
-        Debug.Log($"Skipped damage since I'm invulnerable.");
+        Debug.Log("Skipped damage since I'm invulnerable.");
+    }
+    public IHealth GetOriginal()
+    {
+        return original; 
     }
 }

@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour, IUImanager
             roundText = roundTextObject.GetComponent<TextMeshProUGUI>();
         }
         UpdateHealth(playerController != null ? playerController.HPTracker : 0);
-        UpdatePoints(scoreManager != null ? scoreManager.value : 0);
+        UpdatePoints(scoreManager.value);
         UpdateRound(gameManager != null ? gameManager.currentWave : 0);
     }
     private void Update()

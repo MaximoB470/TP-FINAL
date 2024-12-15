@@ -8,14 +8,14 @@ public class HealCommand : Command
     [SerializeField] private int healAmount = 30;
     public override void Execute()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("player");
-        HealthHandler wrapper = player.GetComponent<HealthHandler>();
+        var playerController = ServiceLocator.Instance.GetService<PlayerController>();
+        HealthHandler wrapper = playerController.GetComponent<HealthHandler>();
         wrapper.Heal(healAmount);
     }
     public override void Execute(string[] args)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("player");
-        HealthHandler wrapper = player.GetComponent<HealthHandler>();
+        var playerController = ServiceLocator.Instance.GetService<PlayerController>();
+        HealthHandler wrapper = playerController.GetComponent<HealthHandler>();
         wrapper.Heal(healAmount);
     }
 }
