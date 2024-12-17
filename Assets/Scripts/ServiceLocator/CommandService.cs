@@ -40,7 +40,7 @@ public class CommandConsoleService : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"No command found for alias: {alias}");
+            Debug.LogWarning($"No alias: {alias}");
         }
     }
 }

@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour, IGameManager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

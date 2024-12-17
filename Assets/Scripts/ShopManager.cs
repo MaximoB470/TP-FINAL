@@ -28,7 +28,6 @@ public class ShopManager : MonoBehaviour, IShopManager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

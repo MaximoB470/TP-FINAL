@@ -60,13 +60,13 @@ public class HealthHandler : MonoBehaviour, IHealth
         public void ApplyInvulnerability()
         {
             healthHandler.SetDecorator(invulnerableHealth);
-            Debug.Log("Invulnerability applied.");
+            Debug.Log("Invulnerability applied");
         }
 
         public void RemoveInvulnerability()
         {
             healthHandler.SetDecorator(originalHealth);
-            Debug.Log("Invulnerability removed.");
+            Debug.Log("Invulnerability removed");
         }
     }
 }

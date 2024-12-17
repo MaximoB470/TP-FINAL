@@ -9,7 +9,7 @@ public class CommandButton : MonoBehaviour
 
     public void OnClick()
     {
-        var commandConsoleService = FindObjectOfType<CommandConsoleService>();
+        var commandConsoleService = ServiceLocator.Instance.GetService<CommandConsoleService>();
 
         if (commandConsoleService != null)
         {
@@ -18,7 +18,7 @@ public class CommandButton : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("CommandConsoleService not found in the scene.");
+            Debug.LogWarning("CommandConsoleService not found");
         }
     }
 }

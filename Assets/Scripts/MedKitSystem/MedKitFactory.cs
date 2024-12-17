@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MedKitFactory
 {
-    private readonly Dictionary<int, MedKit> medKitPool = new Dictionary<int, MedKit>();
+    private Dictionary<int, MedKit> medKitPool = new Dictionary<int, MedKit>();
     void Start()
     {
         ServiceLocator.Instance.Register(new MedKitFactory());
     }
-
     public MedKit GetMedKit(int healAmount)
     {
         if (!medKitPool.ContainsKey(healAmount))

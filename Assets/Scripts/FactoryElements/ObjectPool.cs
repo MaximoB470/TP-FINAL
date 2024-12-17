@@ -5,7 +5,7 @@ public class ObjectPool<T> : MonoBehaviour where T : Component
 {
     [SerializeField] private T prefab;       
     [SerializeField] private int poolSize = 10; 
-    private readonly Queue<T> pool = new Queue<T>();  
+    private Queue<T> pool = new Queue<T>();  
     protected virtual void Start()
     {
         InitializePool();

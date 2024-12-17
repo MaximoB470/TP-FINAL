@@ -15,7 +15,5 @@ public class PlayButton : MonoBehaviour
             state = new StateMachine();
             state.ChangeState(new PlayingState(state));
         }
-
-
     }
 }

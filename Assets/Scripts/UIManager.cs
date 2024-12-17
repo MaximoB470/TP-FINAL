@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour, IUImanager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

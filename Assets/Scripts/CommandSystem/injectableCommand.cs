@@ -19,7 +19,6 @@ public class injectableCommand : ICommand
         DoExecute = doExecute;
         DoExecuteWithArgs = doExecuteWithArgs;
     }
-
     public void Execute()
     {
         DoExecute?.Invoke();
