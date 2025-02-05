@@ -10,6 +10,7 @@ public class CommandConsoleService : MonoBehaviour
 
     private void Awake()
     {
+        ServiceLocator.Instance.Register<CommandConsoleService>(this);
         foreach (var command in commands)
         {
             AddCommand(command);
