@@ -17,7 +17,7 @@ public interface IUImanager
 }
 public class UIManager : MonoBehaviour, IUImanager
 {
-    public static UIManager Instance { get; private set; }
+
 
     [SerializeField] private GameObject healthTextObject;
     [SerializeField] private GameObject pointsTextObject;
@@ -41,20 +41,14 @@ public class UIManager : MonoBehaviour, IUImanager
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+
+
     }
     private void Start()
     {
-        ServiceLocator.Instance.Register<UIManager>(this);
+        HideAllMenus();
         ServiceLocator.Instance.Register<IUImanager>(this);
+        ServiceLocator.Instance.Register<UIManager>(this);
         playerController = ServiceLocator.Instance.GetService<PlayerController>();
         gameManager = ServiceLocator.Instance.GetService<GameManager>();
         scoreManager = ServiceLocator.Instance.GetService<ScoreManager>();

@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
+        ServiceLocator.Instance.Register<ScoreManager>(this);
         if (Instance == null)
         {
             Instance = this;
@@ -28,7 +29,7 @@ public class ScoreManager : MonoBehaviour
     }
     void Start()
     {
-        ServiceLocator.Instance.Register<ScoreManager>(this);
+       
     }
     public void incrementPoints()
     {
